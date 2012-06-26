@@ -1,0 +1,33 @@
+#+TITLE: Bro Mode for Emacs
+
+* Highlighting
+  Taken from Matthias Vallentin's [[https://github.com/mavam/brogments/blob/master/bro_lexer/bro.py][pygments]] lexer for Bro.  
+** DONE Keywords
+   CLOSED: [2012-06-26 Tue 15:10]
+   add,alarm,break,case,const,continue,delete,do,else,enum,event,export,for,function,if,global,local,module,next,of,print,redef,return,schedule,type,when,while
+   "\\<\\(a\\(?:dd\\|larm\\)\\|break\\|c\\(?:ase\\|on\\(?:st\\|tinue\\)\\)\\|d\\(?:elete\\|o\\)\\|e\\(?:lse\\|num\\|\\(?:ven\\|xpor\\)t\\)\\|f\\(?:or\\|unction\\)\\|global\\|if\\|local\\|module\\|next\\|of\\|print\\|re\\(?:def\\|turn\\)\\|schedule\\|type\\|wh\\(?:en\\|ile\\)\\)\\>"
+** DONE Keyword Types
+   CLOSED: [2012-06-26 Tue 15:10]
+   addr,any,bool,count,counter,double,file,int,interval,net,pattern,port,record,set,string,subnet,table,time,timer,vector
+   "\\<\\(a\\(?:ddr\\|ny\\)\\|bool\\|count\\(?:er\\)?\\|double\\|file\\|int\\(?:erval\\)?\\|net\\|p\\(?:attern\\|ort\\)\\|record\\|s\\(?:et\\|tring\\|ubnet\\)\\|t\\(?:able\\|imer?\\)\\|vector\\)\\>"   
+** DONE Comments 
+   CLOSED: [2012-06-26 Tue 15:10]
+
+* Indentation and Formatting Requirements
+  1. If we are at the beginning of the file, indent to column 0
+  2. If we are currently at closing brace (}), then de-indent to the previous line
+  3. If previous line was an "if" statement, then increase indentation relative to the previous line.
+  4. If previous line does not end in a semi colon (:) but instead with a comma (,), increase indentation.
+
+** DONE Breaking Lines repeats the previous indentation.
+   CLOSED: [2012-06-26 Tue 15:31]
+   If we match only on whether or not the end of the line is ".*,$" it will constantly indent when a split statement spans multiple lines.
+   Solved this by removing the following from bro-indent-line
+   #+begin_src elisp
+     ;;(setq not-indented nil))
+   #+end_src
+   to let bro-indent-line propagate up.
+   
+* References
+  1. [[http://www.emacswiki.org/emacs/ModeTutorial][ModeTutorial on Emacs Wiki]]
+     
