@@ -37,28 +37,28 @@
       (indent-line-to 0)
     (let ((not-indented t)
           cur-indent)
-      (if (looking-at "^[ \t]*}")
-          (progn
-            (save-excursion
-            (forward-line -1)
-            (setq cur-indent (- (current-indentation) default-tab-width)))
-        (if (< cur-indent 0)
-            (setq cur-indent 0)))
       (save-excursion
         (while not-indented
           (forward-line -1)
           (if (looking-at "^[ \t]*}")
               (progn
-                (setq cur-indent (current-indentation))
+                (setq cur-indent (- (current-indentation) default-tab-width))
                 (setq not-indented nil))
             (if (looking-at "^[ \t]*\\(event\\|if\\|for\\|export\\|while\\|redef\\)")
                 (progn
                   (setq cur-indent (+ (current-indentation) default-tab-width))
                   (setq not-indented nil))
-              (if (looking-at ".*,$")
-                  (setq cur-indent (+ (current-indentation) default-tab-width))
+              (if (looking-at ".*;$")
+                  (progn
+                    (forward-line -1)
+                    (if (looking-at ".*,$")
+                        (progn
+                          (setq cur-indent (- (current-indentation) default-tab-width))
+                          (setq not-indented nil))))
                 (if (bobp)
-                    (setq not-indented nil))))))))
+                    (setq not-indented nil)))))))
+      (if (< cur-indent 0)
+          (setq cur-indent 0))
       (if cur-indent
           (indent-line-to cur-indent)
         (indent-line-to 0)))))
