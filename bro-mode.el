@@ -41,10 +41,8 @@
         (while not-indented
           (if (looking-at "^.*};$")
               (progn
-                (message "Hit!")
                 (setq cur-indent (- (current-indentation) default-tab-width))
                 (setq not-indented nil))
-            (message "No hit")
             (forward-line -1)
             (if (looking-at "^[ \t]*}")
                 (progn
