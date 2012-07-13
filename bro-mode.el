@@ -39,24 +39,30 @@
           cur-indent)
       (save-excursion
         (while not-indented
-          (forward-line -1)
-          (if (looking-at "^[ \t]*}")
+          (if (looking-at "^.*};$")
               (progn
+                (message "Hit!")
                 (setq cur-indent (- (current-indentation) default-tab-width))
                 (setq not-indented nil))
-            (if (looking-at "^[ \t]*\\(event\\|if\\|for\\|export\\|while\\|redef\\)")
+            (message "No hit")
+            (forward-line -1)
+            (if (looking-at "^[ \t]*}")
                 (progn
-                  (setq cur-indent (+ (current-indentation) default-tab-width))
+                  (setq cur-indent (- (current-indentation) default-tab-width))
                   (setq not-indented nil))
-              (if (looking-at ".*;$")
+              (if (looking-at "^[ \t]*\\(event\\|if\\|for\\|export\\|while\\|redef\\)")
                   (progn
-                    (forward-line -1)
-                    (if (looking-at ".*,$")
-                        (progn
-                          (setq cur-indent (- (current-indentation) default-tab-width))
-                          (setq not-indented nil))))
-                (if (bobp)
-                    (setq not-indented nil)))))))
+                    (setq cur-indent (+ (current-indentation) default-tab-width))
+                    (setq not-indented nil))
+                (if (looking-at ".*;$")
+                    (progn
+                      (forward-line -1)
+                      (if (looking-at ".*,$")
+                          (progn
+                            (setq cur-indent (- (current-indentation) default-tab-width))
+                            (setq not-indented nil))))
+                  (if (bobp)
+                      (setq not-indented nil))))))))
       (if (< cur-indent 0)
           (setq cur-indent 0))
       (if cur-indent
