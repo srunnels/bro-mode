@@ -15,6 +15,11 @@
    3. bro-event-lookup function
       Quick lookup of builtin functions.  Place the point over a built in bro function (i.e. http_header ) and M-x bro-event-lookup will open a temporary buffer with the documentation with bro-mode highlighting for that function.
       
+** History
+   |------------------------+------------------------|
+   | Date                   | Change                 |
+   |------------------------+------------------------|
+   | [2012-07-14 Sat 12:51] | Added bro-event-lookup |
 
       
    

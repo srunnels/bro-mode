@@ -98,8 +98,7 @@ Requires that the bro-event-bif be set with a valid path and filename."
          (start-pos)
          (end-pos)
          (bro-event-doc)
-         (bro-event-buffer)
-        ) ; _let_variable_list
+         (bro-event-buffer))
     (message "Looking for %s in %s" bro-event-name bro-event-bif)
     (if (file-exists-p bro-event-bif)
         (progn
@@ -123,15 +122,9 @@ Requires that the bro-event-bif be set with a valid path and filename."
                       (switch-to-buffer "bro-event")
                       (setq buffer-read-only nil)
                       (bro-mode)))
-                  (kill-buffer bro-event-buffer)
-                  ) ; _progn
-              (message "unable to find the event specified"))
-            ) ; _save-excursion
-          ) ; _progn
-      (message "Did not find valid event.bif file.")
-      )
-    ) ; _let
-  ) ; _defun
+                  (kill-buffer bro-event-buffer))
+              (message "unable to find the event specified"))))
+      (message "Did not find valid event.bif file."))))
 
 (provide 'bro-mode)
   
