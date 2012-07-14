@@ -2,7 +2,7 @@
   An emacs major mode for the Bro Scripting Language.
   
 ** Setup
-   #+begin_src elisp
+   #+begin_src emacs-lisp
      (add-to-list 'load-path "~/emacs.d/site-lisp/bro-mode/")
      (setq bro-event-bif "~/Documents/src/bro/build/src/base/event.bif.bro")
      (require 'bro-mode)
