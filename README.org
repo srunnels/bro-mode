@@ -1,0 +1,26 @@
+* Bro Mode
+  An emacs major mode for the Bro Scripting Language.
+  
+** Setup
+   #+begin_src elisp
+     (add-to-list 'load-path "~/emacs.d/site-lisp/bro-mode/")
+     (setq bro-event-bif "~/Documents/src/bro/build/src/base/event.bif.bro")
+     (require 'bro-mode)
+   #+end_src
+
+
+** Features
+   1. Indentation
+   2. Keyword, builtin, and operator highlighting
+   3. bro-event-lookup function
+      Quick lookup of builtin functions.  Place the point over a built in bro function (i.e. http_header ) and M-x bro-event-lookup will open a temporary buffer with the documentation with bro-mode highlighting for that function.
+      
+
+      
+   
+      
+
+
+  
+  
+  
