@@ -165,18 +165,16 @@ Opens a new buffer with all global events that match the query"
 (defun bro-insert-event()
   "Insert the built-in function at point into the kill ring."
   (interactive)
-  (let ((bro-event-builtin (buffer-substring (line-beginning-position) (line-end-position))))
+  (let ((bro-event-builtin (buffer-substring
+                            (line-beginning-position)
+                            (line-end-position))))
     (if (looking-at "^global.*event(.*).*;")
         (progn
           (kill-new (replace-regexp-in-string
                      "global \\(.*\\): event\\(.*\\).*;"
                      "event \\1\\2"
                      bro-event-builtin))
-          (message "Event sent to kill-ring")
-          ) ; _progn
-      (message "Not a bro built in event handler;")
-      ); _if
-    ) ; _let
- ) ; _defun
+          (message "Event sent to kill-ring"))
+      (message "Not a bro built in event handler;"))))
     
 (provide 'bro-mode)
