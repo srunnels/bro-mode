@@ -106,8 +106,12 @@ Requires that the bro-event-bif be set with a valid path and filename."
           (save-excursion
             ;; switch to a buffer with the event.bif.bro file
             (set-buffer bro-event-buffer)
+            (beginning-of-buffer)
             ;; search for the string
-            (if (search-forward (format "global %s: event" bro-event-name) nil 1)
+            (if (search-forward (format
+                                 "global %s: event"
+                                 bro-event-name (beginning-of-buffer))
+                                nil 1)
                 (progn
                   (end-of-line)
                   (setq end-pos (point))
@@ -159,7 +163,8 @@ Opens a new buffer with all global events that match the query"
                 (switch-to-buffer "bro-event-list")
                 (setq buffer-read-only nil)
                 (bro-mode)
-                (toggle-truncate-lines)))))
+                (toggle-truncate-lines))))
+          (kill-buffer bro-event-buffer))
       (message "No valid event.bif found."))))
 
 (defun bro-insert-event()

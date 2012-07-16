@@ -18,13 +18,16 @@
       Quick keyword lookup of builtin functions.  M-x bro-event-query and provide a query.  A new buffer will be created with the results.
       
 ** History
-   |------------------------+------------------------------------------|
-   | Date                   | Change                                   |
-   |------------------------+------------------------------------------|
-   | [2012-07-14 Sat 12:51] | Added bro-event-lookup                   |
-   | [2012-07-16 Mon 02:07] | Removed a spare bro-event-bif definition |
-   | [2012-07-16 Mon 02:09] | Added bro-event-query                    |
-   | [2012-07-16 Mon 16:07] | Added bro-insert-event                   |
+   |------------------------+--------------------------------------------------------------------------------------------------|
+   | Date                   | Change                                                                                           |
+   |------------------------+--------------------------------------------------------------------------------------------------|
+   | [2012-07-14 Sat 12:51] | Added bro-event-lookup                                                                           |
+   | [2012-07-16 Mon 02:07] | Removed a spare bro-event-bif definition                                                         |
+   | [2012-07-16 Mon 02:09] | Added bro-event-query                                                                            |
+   | [2012-07-16 Mon 16:07] | Added bro-insert-event                                                                           |
+   | [2012-07-16 Mon 16:59] | Bug Fix to close event.bif.bro when bro-event-query is done with it.                             |
+   | [2012-07-16 Mon 17:04] | Buf Fix to set the scope of the re-search-forward in bro-event-lookup to beginning of the buffer |
+
 
 
 
