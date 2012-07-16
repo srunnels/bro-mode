@@ -14,12 +14,18 @@
    2. Keyword, builtin, and operator highlighting
    3. bro-event-lookup function
       Quick lookup of builtin functions.  Place the point over a built in bro function (i.e. http_header ) and M-x bro-event-lookup will open a temporary buffer with the documentation with bro-mode highlighting for that function.
+   4. bro-event-query function
+      Quick keyword lookup of builtin functions.  M-x bro-event-query and provide a query.  A new buffer will be created with the results.
       
 ** History
-   |------------------------+------------------------|
-   | Date                   | Change                 |
-   |------------------------+------------------------|
-   | [2012-07-14 Sat 12:51] | Added bro-event-lookup |
+   |------------------------+------------------------------------------|
+   | Date                   | Change                                   |
+   |------------------------+------------------------------------------|
+   | [2012-07-14 Sat 12:51] | Added bro-event-lookup                   |
+   | [2012-07-16 Mon 02:07] | Removed a spare bro-event-bif definition |
+   | [2012-07-16 Mon 02:09] | Added bro-event-query                    |
+   |                        |                                          |
+
 
       
    

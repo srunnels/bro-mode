@@ -1,3 +1,4 @@
+
 ;; This was done for personal edification and steals from Scott Andrew Borton's
 ;; Mode Tutorial with aplomb and apologies.
 
@@ -87,8 +88,6 @@
   (setq mode-name "Bro")
   (run-hooks 'bro-mode-hook))
 
-(setq bro-event-bif "~/Documents/src/bro/build/src/base/event.bif.bro")
-
 (defun bro-event-lookup ()
   "Retrieves the documentation for the event at point.
 
@@ -126,6 +125,41 @@ Requires that the bro-event-bif be set with a valid path and filename."
               (message "unable to find the event specified"))))
       (message "Did not find valid event.bif file."))))
 
-(provide 'bro-mode)
-  
+(defun bro-event-query (query)
+  "Query for related events
 
+Opens a new buffer with all global events that match the query"
+  (interactive "sEvent Query: ")
+  (let ((start-pos)
+        (end-pos)
+        (bro-query-buffer "bro-queries")
+        (bro-query-results '()))
+    (message "Looking for \"%s\" in %s" query bro-event-bif)
+    (if (file-exists-p bro-event-bif)
+        (progn
+          (message "Found valid event.bif file.")
+          (setq bro-event-buffer (find-file-noselect bro-event-bif))
+          (save-excursion
+            (set-buffer bro-event-buffer)
+            (beginning-of-buffer)
+            (while (re-search-forward (format "global .*%s.*: event" query) nil t)
+              (progn
+                (beginning-of-line)
+                (setq start-pos (point))
+                (end-of-line)
+                (setq end-pos (point))
+                (add-to-list 'bro-query-results (buffer-substring start-pos end-pos))
+                (with-output-to-temp-buffer "bro-event-list"
+                  (mapc
+                   (lambda (x)
+                     (princ (format "%s\n" x)))
+                   bro-query-results))))
+            (save-window-excursion
+              (save-excursion
+                (switch-to-buffer "bro-event-list")
+                (setq buffer-read-only nil)
+                (bro-mode)
+                (toggle-truncate-lines)))))
+      (message "No valid event.bif found."))))
+
+(provide 'bro-mode)
