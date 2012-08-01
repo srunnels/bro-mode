@@ -176,8 +176,8 @@ Opens a new buffer with all global events that match the query"
     (if (looking-at "^global.*event(.*).*;")
         (progn
           (kill-new (replace-regexp-in-string
-                     "global \\(.*\\): event\\(.*\\).*;"
-                     "event \\1\\2"
+                     "global \\(.*\\): event\\(.*)\\).*;"
+                     "event \\1\\2\n\t{\n\t}"
                      bro-event-builtin))
           (message "Event sent to kill-ring"))
       (message "Not a bro built in event handler;"))))
