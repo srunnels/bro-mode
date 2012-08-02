@@ -58,7 +58,6 @@
                       (forward-line -1)
                       (if (looking-at ".*,$")
                           (progn
-                            (message "hit")
                             (setq cur-indent (- (current-indentation) default-tab-width))
                             (setq not-indented nil))))
                   (if (looking-at ".*,$")
@@ -66,15 +65,12 @@
                         (forward-line -1)
                         (if (not(looking-at ".*,$"))
                             (progn
-                              (message "first non semi'd line indent")
                               (setq cur-indent (+ (current-indentation) default-tab-width))
                               (setq not-indented nil))
                           (progn
-                            (message "previous two lines was a comma")
                             (forward-line)
                             (setq cur-indent (current-indentation))
-                            (setq not-indented nil)
-                            )))
+                            (setq not-indented nil))))
                     (if (bobp)
                         (setq not-indented nil)))))))))
       (if (< cur-indent 0)
