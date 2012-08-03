@@ -42,29 +42,44 @@
         (while not-indented
           (if (looking-at "^.*};$")
               (progn
+                ;; line ending in '};"
+                (message " line ending in '};")
+                (forward-line -1)
                 (setq cur-indent (- (current-indentation) default-tab-width))
                 (setq not-indented nil))
             (forward-line -1)
             (if (looking-at "^[ \t]*}")
                 (progn
+                  ;; blank line ending in '}"
+                  (message " blank line ending in '}")
                   (setq cur-indent (- (current-indentation) default-tab-width))
                   (setq not-indented nil))
               (if (looking-at "^[ \t]*\\(event\\|if\\|for\\|export\\|while\\|redef\\)")
                   (progn
+                    ;; a event, if, for, export, while or redef block
+                    (message " a event, if, for, export, while or redef block")
                     (setq cur-indent (+ (current-indentation) default-tab-width))
                     (setq not-indented nil))
                 (if (looking-at ".*;$")
                     (progn
+                      ;; a line ending in a ";"
+                      (message "a line ending in a ;")
                       (forward-line -1)
                       (if (looking-at ".*,$")
                           (progn
+                            ;; a line ending in a comma followed by a line ending in a semicolon
+                            (message "a line ending in a comma followed by a line ending in a semicolon")
                             (setq cur-indent (- (current-indentation) default-tab-width))
                             (setq not-indented nil))))
                   (if (looking-at ".*,$")
+                      ;; first line not ending in semi-colon
                       (progn
+                        (message "first line not ending in semi-colon")
                         (forward-line -1)
                         (if (not(looking-at ".*,$"))
+                            ;; second line not ending in semi-colon
                             (progn
+                              (message " second line not ending in semi-colon")
                               (setq cur-indent (+ (current-indentation) default-tab-width))
                               (setq not-indented nil))
                           (progn
