@@ -2,15 +2,14 @@
   An emacs major mode for the Bro Scripting Language.
   
 ** Setup
-   #+BEGIN_SRC emacs-lisp
-     (setq exec-path (append exec-path '("/Users/Mac/Documents/src/bro/build/src/")))
-     (setenv "PATH" (concat (getenv "PATH") ":/Users/Mac/Documents/src/bro/build/src/"))
-     (setenv "BROPATH" "/Users/Mac/Documents/src/bro/build/src:/Users/Mac/Documents/src/bro/scripts:/Users/Mac/Documents/src/bro/scripts/policy:/Users/Mac/Documents/src/bro/scripts/site")
-     (add-to-list 'load-path "~/emacs.d/site-lisp/bro-mode/")
-     (setq bro-event-bif "~/Documents/src/bro/build/src/base/event.bif.bro")
-     (setq bro-tracefiles "~/tracefiles")
-     (require 'bro-mode)
-   #+END_SRC
+   : (setq exec-path (append exec-path '("/Users/Mac/Documents/src/bro/build/src/")))
+   : (setenv "PATH" (concat (getenv "PATH") ":/Users/Mac/Documents/src/bro/build/src/"))
+   : (setenv "BROPATH" "/Users/Mac/Documents/src/bro/build/src:/Users/Mac/Documents/src/bro/scripts:/Users/Mac/Documents/src/bro/scripts/policy:/Users/Mac/Documents/src/bro/scripts/site")
+   : (add-to-list 'load-path "~/emacs.d/site-lisp/bro-mode/")
+   : (setq bro-event-bif "~/Documents/src/bro/build/src/base/event.bif.bro")
+   : (setq bro-tracefiles "~/tracefiles")
+   : (require 'bro-mode)
+
 
 
 ** Features
@@ -22,15 +21,13 @@
       Quick keyword lookup of builtin functions.  M-x bro-event-query and provide a query.  A new buffer will be created with the results.
    5. bro-run
       Requires that PATH and BROPATH be set correctly.  I run out of the build directory and use the following in my init file.
-      #+begin_src emacs-lisp
-        (setq exec-path (append exec-path '("/Users/Mac/Documents/src/bro/build/src/")))
-        (setenv "PATH" (concat (getenv "PATH") ":/Users/Mac/Documents/src/bro/build/src/"))
-        (setenv "BROPATH" "/Users/Mac/Documents/src/bro/build/src:/Users/Mac/Documents/src/bro/scripts:/Users/Mac/Documents/src/bro/scripts/policy:/Users/Mac/Documents/src/bro/scripts/site")
-      #+end_src
+      : (setq exec-path (append exec-path '("/Users/Mac/Documents/src/bro/build/src/")))
+      : (setenv "PATH" (concat (getenv "PATH") ":/Users/Mac/Documents/src/bro/build/src/"))
+      : (setenv "BROPATH" "/Users/Mac/Documents/src/bro/build/src:/Users/Mac/Documents/src/bro/scripts:/Users/Mac/Documents/src/bro/scripts/policy:/Users/Mac/Documents/src/bro/scripts/site")
+
       It also requires that bro-tracefiles be set to the directory with your tracefiles.
-      #+begin_src emacs-lisp
-        (setq bro-tracefiles "~/tracefiles")      
-      #+end_src
+      : (setq bro-tracefiles "~/tracefiles")      
+
       Once it's properly set up, M-x bro-run will send the entire buffer as code to bro asking for the tracefile you want to use and the signature file you want use.
    6. bro-run-region
       Same as bro-run but with the region instead of the entire buffer.
