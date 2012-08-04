@@ -66,7 +66,7 @@
                       (message "blank line ending in '} - decrementing indentation")
                       (setq cur-indent (- (current-indentation) default-tab-width))
                       (setq not-indented nil))
-                  (if (looking-at "^[ \t]*\\(event\\|if\\|for\\|export\\|while\\|redef\\)")
+                  (if (looking-at "^[ \t]*\\(event\\|if\\|for\\|export\\|while\\|redef.*{\\)")
                       (progn
                         ;; a event, if, for, export, while or redef block
                         (message " a event, if, for, export, while or redef block")
