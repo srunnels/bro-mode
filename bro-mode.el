@@ -36,13 +36,11 @@
   (beginning-of-line)
   (if (bobp)
       (progn
-        (message "bob")
         (indent-line-to 0))
     (let ((not-indented t)
           (cur-indent 0))
       (save-excursion
         (while not-indented
-          (message "up one line now")
           (forward-line -1)
           (if (bobp)
               (progn
@@ -51,44 +49,37 @@
             (unless (or (looking-at "^[ \t]*$") (looking-at "^[ \t]*#+.*$"))
               (if (looking-at "^[ \t]*};$")
                   (progn
-                    (message "solitary '};'")
                     (setq cur-indent (- (current-indentation) default-tab-width))
                     (setq not-indented nil)
                     )
                 (if (looking-at "^.*};$")
                   (progn
                     ;; line ending in '};'"
-                    (message "line ending in '}; - maintaining indentation")
                     (setq cur-indent (current-indentation))
                     ;;(setq cur-indent (- (current-indentation) default-tab-width))
                     (setq not-indented nil))
                 (if (looking-at "^[ \t]*}$")
                     (progn
                       ;; blank line ending in '}"
-                      (message "blank line ending in '} - decrementing indentation")
                       (setq cur-indent (- (current-indentation) default-tab-width))
                       (setq not-indented nil))
                   (if (looking-at "^[ \t]*\\(event\\|if\\|for\\|export\\|while\\|redef.*{\\|type.*\{\\)")
                       (progn
                         ;; a event, if, for, export, while or redef block
-                        (message " a event, if, for, export, while or redef block")
                         (setq cur-indent (+ (current-indentation) default-tab-width))
                         (setq not-indented nil))
                     (if (looking-at ".*;$")
                         (progn
                           ;; a line ending in a ";"
-                          (message "a line ending in a ';' we need to check the previous line now")
                           (save-excursion
                             (forward-line -1)
                             (if (looking-at ".*;$")
                                 (progn
-                                  (message "--> next line up also ends in ';' - maintaining indent")
                                   (setq cur-indent (current-indentation))
                                   (setq not-indented nil))
                               (if (looking-at ".*,$")
                                   (progn
                                     ;; a line ending in a comma followed by a line ending in a semicolon
-                                    (message "a line ending in a comma followed by a line ending in a semicolon")
                                     (setq cur-indent (- (current-indentation) default-tab-width))
                                     (setq not-indented nil)))
                               )
@@ -97,19 +88,16 @@
                       (if (looking-at ".*,$")
                           ;; first line not ending in semi-colon
                           (progn
-                            (message "first line not ending in semi-colon, we need to check the previous")
                             (save-excursion
                               (forward-line -1)
                               (if (looking-at "^[ \t]*$")
                                   (progn
-                                    (message "blank line previous to a line with a comma, incrementing indentation")
                                     (forward-line)
                                     (setq cur-indent (+ (current-indentation) default-tab-width))
                                     (setq not-indented nil))
                                 (if (looking-at ".*,$")
                                     ;; second line not ending in semi-colon
                                     (progn
-                                      (message "--> second previous line ending with a comma or blank, maintaining indentation")
                                       ;;(setq cur-indent (+ (current-indentation) default-tab-width))
                                       (forward-line)
                                       (setq cur-indent (current-indentation))
@@ -129,7 +117,6 @@
                               ) ; _progn
                           (if (looking-at ".*[^,;]$")
                               (progn
-                                (message "line ending w/out a semicolon or comma")
                                 (setq cur-indent (- (current-indentation) default-tab-width))
                                 (setq not-indented nil)
                                 ) ;; _progn
