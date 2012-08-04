@@ -244,6 +244,9 @@ Opens a new buffer with all global events that match the query"
       (message "Not a bro built in event handler;"))))
 
 (defun bro-run(tracefile sigfile)
+  "Will run the entire buffer through bro.
+
+Will ask for a tracefile(based on bro-tracefiles) and a signature file"
   (interactive "sTracefile: \nsSignature file: ")
   (shell-command (format "bro %s %s %s"
                          (if (equal tracefile "")
@@ -258,6 +261,9 @@ Opens a new buffer with all global events that match the query"
                          )))
 
 (defun bro-run-region(tracefile sigfile)
+  "Will run the region through bro
+
+Will ask for a tracefile(based on bro-tracefiles) and a signature file"
   (interactive "sTracefile: \nsSignature file: ")
   (shell-command (format "bro %s %s %s"
                          (if (equal tracefile "")
