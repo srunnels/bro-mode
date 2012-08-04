@@ -63,7 +63,7 @@
                       ;; blank line ending in '}"
                       (setq cur-indent (- (current-indentation) default-tab-width))
                       (setq not-indented nil))
-                  (if (looking-at "^[ \t]*\\(^event\\|if\\|else\\|for\\|export\\|while\\|redef.*{\\|type.*\{\\)")
+                  (if (looking-at "^[ \t]*\\(^event\\|if\\|else\\|when\\|for\\|export\\|while\\|redef.*{\\|type.*\{\\)")
                       (progn
                         ;; a event, if, for, export, while or redef block
                         (setq cur-indent (+ (current-indentation) default-tab-width))
