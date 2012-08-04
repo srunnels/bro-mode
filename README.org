@@ -1,7 +1,12 @@
+#+TITLE: Bro-Mode - Bro Scripting Language Major Mode for emacs
+#+STARTUP: odd
+#+Style: <style> h1,h2,h3 {font-family: arial, helvetica, sans-serif} </style>
+
 * Bro Mode
   An emacs major mode for the Bro Scripting Language.
   
 ** Setup
+
    : (setq exec-path (append exec-path '("/Users/Mac/Documents/src/bro/build/src/")))
    : (setenv "PATH" (concat (getenv "PATH") ":/Users/Mac/Documents/src/bro/build/src/"))
    : (setenv "BROPATH" "/Users/Mac/Documents/src/bro/build/src:/Users/Mac/Documents/src/bro/scripts:/Users/Mac/Documents/src/bro/scripts/policy:/Users/Mac/Documents/src/bro/scripts/site")
@@ -21,11 +26,13 @@
       Quick keyword lookup of builtin functions.  M-x bro-event-query and provide a query.  A new buffer will be created with the results.
    5. bro-run
       Requires that PATH and BROPATH be set correctly.  I run out of the build directory and use the following in my init file.
+      
       : (setq exec-path (append exec-path '("/Users/Mac/Documents/src/bro/build/src/")))
       : (setenv "PATH" (concat (getenv "PATH") ":/Users/Mac/Documents/src/bro/build/src/"))
       : (setenv "BROPATH" "/Users/Mac/Documents/src/bro/build/src:/Users/Mac/Documents/src/bro/scripts:/Users/Mac/Documents/src/bro/scripts/policy:/Users/Mac/Documents/src/bro/scripts/site")
 
       It also requires that bro-tracefiles be set to the directory with your tracefiles.
+      
       : (setq bro-tracefiles "~/tracefiles")      
 
       Once it's properly set up, M-x bro-run will send the entire buffer as code to bro asking for the tracefile you want to use and the signature file you want use.
