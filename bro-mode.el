@@ -233,6 +233,7 @@ Opens a new buffer with all global events that match the query"
   (let ((bro-event-builtin (buffer-substring
                             (line-beginning-position)
                             (line-end-position))))
+    (beginning-of-line)
     (if (looking-at "^global.*event(.*).*;")
         (progn
           (kill-new (replace-regexp-in-string
