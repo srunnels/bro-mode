@@ -63,7 +63,7 @@
                       ;; blank line ending in '}"
                       (setq cur-indent (- (current-indentation) default-tab-width))
                       (setq not-indented nil))
-                  (if (looking-at "^[ \t]*\\(event\\|if\\|for\\|export\\|while\\|redef.*{\\|type.*\{\\)")
+                  (if (looking-at "^[ \t]*\\(^event\\|if\\|else\\|for\\|export\\|while\\|redef.*{\\|type.*\{\\)")
                       (progn
                         ;; a event, if, for, export, while or redef block
                         (setq cur-indent (+ (current-indentation) default-tab-width))
@@ -241,5 +241,33 @@ Opens a new buffer with all global events that match the query"
                      bro-event-builtin))
           (message "Event sent to kill-ring"))
       (message "Not a bro built in event handler;"))))
-    
+
+(defun bro-run(tracefile sigfile)
+  (interactive "sTracefile: \nsSignature file: ")
+  (shell-command (format "bro %s %s %s"
+                         (if (equal tracefile "")
+                             (concat " ")
+                           (concat " -r " bro-tracefiles "/" tracefile))
+                         (if (equal sigfile "")
+                             (concat " ")
+                           (concat " -s " sigfile))
+                         (concat " -e '" (buffer-substring
+                                          (point-min)
+                                          (point-max)) "'")
+                         )))
+
+(defun bro-run-region(tracefile sigfile)
+  (interactive "sTracefile: \nsSignature file: ")
+  (shell-command (format "bro %s %s %s"
+                         (if (equal tracefile "")
+                             (concat " ")
+                           (concat " -r " bro-tracefiles "/" tracefile))
+                         (if (equal sigfile "")
+                             (concat " ")
+                           (concat " -s " sigfile))
+                         (concat " -e '" (buffer-substring
+                                          (region-beginning)
+                                          (region-end)) "'"))))
+
+
 (provide 'bro-mode)
