@@ -90,7 +90,8 @@
                           (progn
                             (save-excursion
                               (forward-line -1)
-                              (if (looking-at "^[ \t]*$")
+                              (if (looking-at "^[ \t]*$\\|^[ \t]*{$\\|^[ \t]*#+.*$")
+                                  ;; second line is an empty line
                                   (progn
                                     (forward-line)
                                     (setq cur-indent (+ (current-indentation) default-tab-width))
